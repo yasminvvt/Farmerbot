@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mensaje</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="mensaje">
+        <h2 id="resultado"></h2>
+        <a href="index.html">Volver al formulario</a>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const estado = params.get("estado");
+
+        const mensaje = document.getElementById("resultado");
+
+        if (estado === "ok") {
+            mensaje.textContent = "✅ Registro exitoso.";
+            mensaje.style.color = "green";
+        } else if (estado === "duplicado") {
+            mensaje.textContent = "⚠️ Ese correo ya está registrado.";
+            mensaje.style.color = "orange";
+        } else {
+            mensaje.textContent = "❌ Ocurrió un error.";
+            mensaje.style.color = "red";
+        }
+    </script>
+</body>
+</html>

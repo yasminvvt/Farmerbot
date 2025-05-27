@@ -27,7 +27,9 @@ $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows > 0) {
-    echo "El correo ya está registrado.";
+    // Correo ya registrado
+    header("Location: mensaje.html?estado=duplicado");
+    exit();
 } else {
     // Insertar datos
     $sql_insertar = "INSERT INTO formulario (nombre, email, telefono, pais) VALUES (?, ?, ?, ?)";
@@ -35,9 +37,13 @@ if ($stmt->num_rows > 0) {
     $stmt->bind_param("ssss", $nombre, $email, $telefono, $pais);
 
     if ($stmt->execute()) {
-        echo "Registro exitoso.";
+        // Registro exitoso
+        header("Location: mensaje.html?estado=ok");
+        exit();
     } else {
-        echo "Error al registrar: " . $stmt->error;
+        // Error al registrar
+        header("Location: mensaje.html?estado=error");
+        exit();
     }
 }
 
